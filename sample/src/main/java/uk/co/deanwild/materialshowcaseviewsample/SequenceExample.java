@@ -1,7 +1,7 @@
 package uk.co.deanwild.materialshowcaseviewsample;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -78,7 +78,7 @@ public class SequenceExample extends AppCompatActivity implements View.OnClickLi
                 new MaterialShowcaseView.Builder(this)
                         .setSkipText("SKIP")
                         .setTarget(mButtonTwo)
-                        .setDismissText("GOT IT")
+//                        .setDismissText("GOT IT")
                         .setContentText("This is button two")
                         .withRectangleShape(true)
                         .build()
@@ -87,7 +87,7 @@ public class SequenceExample extends AppCompatActivity implements View.OnClickLi
         sequence.addSequenceItem(
                 new MaterialShowcaseView.Builder(this)
                         .setTarget(mButtonThree)
-                        .setDismissText("GOT IT")
+//                        .setDismissText("GOT IT")
                         .setContentText("This is button three")
                         .withRectangleShape()
                         .build()

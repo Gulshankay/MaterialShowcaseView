@@ -22,7 +22,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -63,9 +65,9 @@ public class MaterialShowcaseView extends FrameLayout implements View.OnTouchLis
     private View mContentBox;
     private TextView mTitleTextView;
     private TextView mContentTextView;
-    private TextView mDismissButton;
+    private ImageButton mDismissButton;
     private boolean mHasCustomGravity;
-    private TextView mSkipButton;
+    private Button mSkipButton;
     private int mGravity;
     private int mContentBottomMargin;
     private int mContentTopMargin;
@@ -300,7 +302,7 @@ public class MaterialShowcaseView extends FrameLayout implements View.OnTouchLis
         mTarget = target;
 
         // update dismiss button state
-        updateDismissButton();
+        updateDismissButton(true);
 
         if (mTarget != null) {
 
@@ -446,26 +448,27 @@ public class MaterialShowcaseView extends FrameLayout implements View.OnTouchLis
         isSequence = isSequenceB;
     }
 
-    private void setDismissText(CharSequence dismissText) {
+    /*private void setDismissText(CharSequence dismissText) {
         if (mDismissButton != null) {
             mDismissButton.setText(dismissText);
             updateDismissButton();
         }
-    }
+    }*/
 
     private void setSkipText(CharSequence skipText) {
         if (mSkipButton != null) {
+            mSkipButton.setVisibility(VISIBLE);
             mSkipButton.setText(skipText);
             updateSkipButton();
         }
     }
 
-    private void setDismissStyle(Typeface dismissStyle) {
+    /*private void setDismissStyle(Typeface dismissStyle) {
         if (mDismissButton != null) {
             mDismissButton.setTypeface(dismissStyle);
             updateDismissButton();
         }
-    }
+    }*/
 
     private void setSkipStyle(Typeface skipStyle) {
         if (mSkipButton != null) {
@@ -486,11 +489,11 @@ public class MaterialShowcaseView extends FrameLayout implements View.OnTouchLis
         }
     }
 
-    private void setDismissTextColor(int textColour) {
+   /* private void setDismissTextColor(int textColour) {
         if (mDismissButton != null) {
             mDismissButton.setTextColor(textColour);
         }
-    }
+    }*/
 
     private void setShapePadding(int padding) {
         mShapePadding = padding;
@@ -576,13 +579,13 @@ public class MaterialShowcaseView extends FrameLayout implements View.OnTouchLis
             setContentTextColor(config.getContentTextColor());
         }
 
-        if(config.getDismissTextColor() > 0){
+        /*if(config.getDismissTextColor() > 0){
             setDismissTextColor(config.getDismissTextColor());
         }
 
         if(config.getDismissTextStyle() != null){
             setDismissStyle(config.getDismissTextStyle());
-        }
+        }*/
 
         if(config.getMaskColor() > 0){
             setMaskColour(config.getMaskColor());
@@ -601,10 +604,10 @@ public class MaterialShowcaseView extends FrameLayout implements View.OnTouchLis
         }
     }
 
-    void updateDismissButton() {
+    void updateDismissButton(boolean enableDismiss) {
         // hide or show button
         if (mDismissButton != null) {
-            if (TextUtils.isEmpty(mDismissButton.getText())) {
+            if (!enableDismiss) {
                 mDismissButton.setVisibility(GONE);
             } else {
                 mDismissButton.setVisibility(VISIBLE);
@@ -686,19 +689,19 @@ public class MaterialShowcaseView extends FrameLayout implements View.OnTouchLis
         /**
          * Set the dismiss button properties
          */
-        public Builder setDismissText(int resId) {
+      /*  public Builder setDismissText(int resId) {
             return setDismissText(activity.getString(resId));
-        }
+        }*/
 
-        public Builder setDismissText(CharSequence dismissText) {
+        /*public Builder setDismissText(CharSequence dismissText) {
             showcaseView.setDismissText(dismissText);
             return this;
-        }
+        }*/
 
-        public Builder setDismissStyle(Typeface dismissStyle) {
+        /*public Builder setDismissStyle(Typeface dismissStyle) {
             showcaseView.setDismissStyle(dismissStyle);
             return this;
-        }
+        }*/
 
 
         /**
@@ -760,6 +763,7 @@ public class MaterialShowcaseView extends FrameLayout implements View.OnTouchLis
         }
 
 
+
         /**
          * Set whether or not the target view can be touched while the showcase is visible.
          * <p>
@@ -800,10 +804,10 @@ public class MaterialShowcaseView extends FrameLayout implements View.OnTouchLis
             return this;
         }
 
-        public Builder setDismissTextColor(int textColour) {
+        /*public Builder setDismissTextColor(int textColour) {
             showcaseView.setDismissTextColor(textColour);
             return this;
-        }
+        }*/
 
         public Builder setDelay(int delayInMillis) {
             showcaseView.setDelay(delayInMillis);
@@ -964,6 +968,7 @@ public class MaterialShowcaseView extends FrameLayout implements View.OnTouchLis
          */
         if (mSingleUse) {
             if (mPrefsManager.hasFired()) {
+                notifyOnSkipped();
                 return false;
             } else {
                 mPrefsManager.setFired();
@@ -1008,7 +1013,7 @@ public class MaterialShowcaseView extends FrameLayout implements View.OnTouchLis
             }
         }, mDelayInMillis);
 
-        updateDismissButton();
+        updateDismissButton(true);
 
         return true;
     }
@@ -1104,5 +1109,20 @@ public class MaterialShowcaseView extends FrameLayout implements View.OnTouchLis
 
     private void setRenderOverNavigationBar(boolean mRenderOverNav) {
         this.mRenderOverNav = mRenderOverNav;
+    }
+
+    private void notifyOnSkipped(){
+        if(mListeners != null){
+            for(IShowcaseListener listener : mListeners){
+                listener.onShowcaseSkipped(this);
+
+            }
+            mListeners.clear();
+            mListeners = null;
+        }
+
+        if(mDetachedListener != null){
+            mDetachedListener.onShowcaseDetached(this, mWasDismissed, mWasSkipped);
+        }
     }
 }

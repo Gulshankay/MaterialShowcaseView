@@ -1,7 +1,7 @@
 package uk.co.deanwild.materialshowcaseviewsample;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -46,7 +46,7 @@ public class CustomExample extends AppCompatActivity implements View.OnClickList
             new MaterialShowcaseView.Builder(this)
                     .setTarget(view)
                     .setShapePadding(96)
-                    .setDismissText("GOT IT")
+//                    .setDismissText("GOT IT")
                     .setContentText("Example of how to setup a MaterialShowcaseView for menu items in action bar.")
                     .setContentTextColor(getResources().getColor(R.color.green))
                     .setMaskColour(getResources().getColor(R.color.purple))
@@ -75,7 +75,7 @@ public class CustomExample extends AppCompatActivity implements View.OnClickList
         new MaterialShowcaseView.Builder(this)
                 .setTarget(mButtonShow)
                 .setContentText("This is some amazing feature you should know about")
-                .setDismissText("GOT IT")
+//                .setDismissText("GOT IT")
                 .setDismissOnTouch(true)
                 .setContentTextColor(getResources().getColor(R.color.green))
                 .setMaskColour(getResources().getColor(R.color.purple))

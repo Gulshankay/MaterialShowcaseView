@@ -1,7 +1,7 @@
 package uk.co.deanwild.materialshowcaseviewsample;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -51,11 +51,12 @@ public class SimpleSingleExample extends AppCompatActivity implements View.OnCli
                 .setTarget(mButtonShow)
                 .setShape(new OvalShape())
                 .setTitleText("Hello")
-                .setDismissText("GOT IT")
+//                .setDismissText("GOT IT")
                 .setContentText("This is some amazing feature you should know about")
                 .setDelay(withDelay) // optional but starting animations immediately in onCreate can make them choppy
                 .singleUse(SHOWCASE_ID) // provide a unique ID used to ensure it is only shown once
 //                .useFadeAnimation() // remove comment if you want to use fade animations for Lollipop & up
+                .renderOverNavigationBar()
                 .show();
     }
 
