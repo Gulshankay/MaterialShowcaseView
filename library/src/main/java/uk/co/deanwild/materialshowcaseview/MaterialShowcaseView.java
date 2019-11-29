@@ -189,7 +189,7 @@ public class MaterialShowcaseView extends FrameLayout implements View.OnTouchLis
         // Prepare eraser Paint if needed
         if (mEraser == null) {
             mEraser = new Paint();
-            mEraser.setColor(0xFFFFFFFF);
+            mEraser.setColor(Color.WHITE);
             mEraser.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
             mEraser.setFlags(Paint.ANTI_ALIAS_FLAG);
         }
@@ -939,6 +939,7 @@ public class MaterialShowcaseView extends FrameLayout implements View.OnTouchLis
         }
 
         mEraser = null;
+        mAnimationFactory = null;
         mAnimationFactory = null;
         mCanvas = null;
         mHandler = null;
