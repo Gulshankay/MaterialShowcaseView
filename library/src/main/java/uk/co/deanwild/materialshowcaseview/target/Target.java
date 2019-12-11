@@ -21,4 +21,5 @@ public interface Target {
     Point getPoint();
 
     Rect getBounds();
+
 }

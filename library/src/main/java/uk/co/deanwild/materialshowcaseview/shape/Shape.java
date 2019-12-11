@@ -35,4 +35,6 @@ public interface Shape {
     int getTotalRadius();
 
     void setPadding(int padding);
+
+    void drawX(Canvas mCanvas, Paint outerCirclePaint, int mXPosition, int mYPosition);
 }

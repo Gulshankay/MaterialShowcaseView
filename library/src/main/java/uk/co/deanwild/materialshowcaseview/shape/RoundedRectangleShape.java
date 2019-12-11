@@ -21,28 +21,39 @@ public class RoundedRectangleShape implements Shape {
 
     }
 
+
+
     @Override
     public int getWidth() {
-        return 0;
+        return width;
     }
 
     @Override
     public int getHeight() {
-        return 0;
+        return height;
     }
 
     @Override
     public void updateTarget(Target target) {
-
+        if (adjustToTarget) {
+//            roundRect bounds = target.getBounds();
+//            height = bounds.height();
+//            if ()
+        }
     }
 
     @Override
     public int getTotalRadius() {
-        return 0;
+        return (height / 2) + padding;
     }
 
     @Override
     public void setPadding(int padding) {
+        this.padding = padding;
+    }
+
+    @Override
+    public void drawX(Canvas mCanvas, Paint outerCirclePaint, int mXPosition, int mYPosition) {
 
     }
 }

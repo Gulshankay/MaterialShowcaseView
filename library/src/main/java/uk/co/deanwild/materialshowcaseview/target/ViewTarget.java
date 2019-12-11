@@ -21,7 +21,7 @@ public class ViewTarget implements Target {
     @Override
     public Point getPoint() {
         int[] location = new int[2];
-        mView.getLocationInWindow(location);
+        mView.getLocationOnScreen(location);
         int x = location[0] + mView.getWidth() / 2;
         int y = location[1] + mView.getHeight() / 2;
         return new Point(x, y);
@@ -30,7 +30,7 @@ public class ViewTarget implements Target {
     @Override
     public Rect getBounds() {
         int[] location = new int[2];
-        mView.getLocationInWindow(location);
+        mView.getLocationOnScreen(location);
         return new Rect(
                 location[0],
                 location[1],

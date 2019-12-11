@@ -60,6 +60,7 @@ public class OvalShape implements Shape {
 
     }
 
+
     public void updateTarget(Target target) {
         if (this.adjustToTarget) {
             this.radius = getPreferredRadius(target.getBounds());
@@ -75,6 +76,15 @@ public class OvalShape implements Shape {
     @Override
     public void setPadding(int padding) {
         this.padding = padding;
+    }
+
+    @Override
+    public void drawX(Canvas mCanvas, Paint outerCirclePaint, int mXPosition, int mYPosition) {
+        if (this.radius > 0) {
+            float rad = (float) (this.radius);
+            RectF rectF = new RectF(mXPosition - rad, mYPosition - rad / 2, mXPosition + rad, mYPosition + rad / 2);
+            mCanvas.drawOval(rectF, outerCirclePaint);
+        }
     }
 
     public int getWidth() {

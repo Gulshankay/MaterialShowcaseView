@@ -16,6 +16,8 @@ import android.os.Build;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -44,7 +46,8 @@ import uk.co.deanwild.materialshowcaseview.target.ViewTarget;
  */
 public class MaterialShowcaseView extends FrameLayout implements View.OnTouchListener, View.OnClickListener {
 
-    public static final int DEFAULT_SHAPE_PADDING = 10;
+    public static int count = 0;
+    public static final int DEFAULT_SHAPE_PADDING = 40;
     public static final int DEFAULT_TOOLTIP_MARGIN = 10;
     long DEFAULT_DELAY = 0;
     long DEFAULT_FADE_TIME = 300;
@@ -53,7 +56,8 @@ public class MaterialShowcaseView extends FrameLayout implements View.OnTouchLis
     private int mOldWidth;
     private Bitmap mBitmap;// = new WeakReference<>(null);
     private Canvas mCanvas;
-    private Paint mEraser;
+    private Paint mEraser, outerCirclePaint;
+    private Paint canvasPaint;
     private Target mTarget;
     private Shape mShape;
     private int mXPosition;
@@ -181,21 +185,44 @@ public class MaterialShowcaseView extends FrameLayout implements View.OnTouchLis
         mOldHeight = height;
 
         // clear canvas
-        mCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+        mCanvas.drawColor(Color.BLACK, PorterDuff.Mode.CLEAR);
 
         // draw solid background
-        mCanvas.drawColor(mMaskColour);
+
+        if(true) {
+            canvasPaint = new Paint();
+            canvasPaint.setColor(Color.BLUE);
+            canvasPaint.setAntiAlias(true);
+            canvasPaint.setAlpha(255);
+        }
+
+
+
+        float mWidth= this.getResources().getDisplayMetrics().widthPixels;
+        float mHeight= this.getResources().getDisplayMetrics().heightPixels;
+
+        mCanvas.drawCircle(mWidth, mHeight, 3*mHeight, canvasPaint);
+//        mCanvas.drawColor(Color.WHITE, PorterDuff.Mode.XOR);
+
+
+
 
         // Prepare eraser Paint if needed
         if (mEraser == null) {
             mEraser = new Paint();
-            mEraser.setColor(Color.WHITE);
-            mEraser.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+            mEraser.setColor(Color.BLACK);
+//            mEraser.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
             mEraser.setFlags(Paint.ANTI_ALIAS_FLAG);
         }
 
         // draw (erase) shape
         mShape.draw(mCanvas, mEraser, mXPosition, mYPosition);
+
+        outerCirclePaint = new Paint();
+        outerCirclePaint.setColor(Color.WHITE);
+        outerCirclePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+        outerCirclePaint.setFlags(Paint.ANTI_ALIAS_FLAG);
+        mShape.drawX(mCanvas, outerCirclePaint, mXPosition, mYPosition);
 
         // Draw the bitmap on our views  canvas.
         canvas.drawBitmap(mBitmap, 0, 0, null);

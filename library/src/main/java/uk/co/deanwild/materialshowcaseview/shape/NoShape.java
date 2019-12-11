@@ -26,6 +26,11 @@ public class NoShape implements Shape {
     }
 
     @Override
+    public void drawX(Canvas mCanvas, Paint outerCirclePaint, int mXPosition, int mYPosition) {
+
+    }
+
+    @Override
     public void draw(Canvas canvas, Paint paint, int x, int y) {
         // do nothing
     }

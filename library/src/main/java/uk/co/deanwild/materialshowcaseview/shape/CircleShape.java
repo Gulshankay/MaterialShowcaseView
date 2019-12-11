@@ -1,9 +1,13 @@
 package uk.co.deanwild.materialshowcaseview.shape;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 import uk.co.deanwild.materialshowcaseview.target.Target;
 
 /**
@@ -11,9 +15,10 @@ import uk.co.deanwild.materialshowcaseview.target.Target;
  */
 public class CircleShape implements Shape {
 
+
     private int radius = 200;
     private boolean adjustToTarget = true;
-    private int padding;
+    private int padding ;
 
     public CircleShape() {
     }
@@ -49,9 +54,11 @@ public class CircleShape implements Shape {
     @Override
     public void draw(Canvas canvas, Paint paint, int x, int y) {
         if (radius > 0) {
-            canvas.drawCircle(x, y, radius + padding, paint);
+            canvas.drawCircle(x, y, radius+padding, paint);
         }
     }
+
+
 
     @Override
     public void updateTarget(Target target) {
@@ -67,6 +74,13 @@ public class CircleShape implements Shape {
     @Override
     public void setPadding(int padding) {
         this.padding = padding;
+    }
+
+    @Override
+    public void drawX(Canvas mCanvas, Paint outerCirclePaint, int mXPosition, int mYPosition) {
+        if (radius > 0) {
+            mCanvas.drawCircle(mXPosition, mYPosition, radius, outerCirclePaint);
+        }
     }
 
     @Override
