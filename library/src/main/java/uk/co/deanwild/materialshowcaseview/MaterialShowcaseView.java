@@ -195,7 +195,7 @@ public class MaterialShowcaseView extends FrameLayout implements View.OnTouchLis
             canvasPaint = new Paint();
             canvasPaint.setColor(Color.BLACK);
             canvasPaint.setAntiAlias(true);
-            canvasPaint.setAlpha(240);
+            canvasPaint.setAlpha(235);
             canvasPaint.setMaskFilter(new BlurMaskFilter(8, BlurMaskFilter.Blur.NORMAL));
         }
 
@@ -209,8 +209,8 @@ public class MaterialShowcaseView extends FrameLayout implements View.OnTouchLis
         if (true) {
             mEraser = new Paint();
             mEraser.setColor(Color.BLACK);
+            mEraser.setAlpha(245);
             mEraser.setAntiAlias(true);
-            mEraser.setAlpha(20);
 //            mEraser.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
             mEraser.setFlags(Paint.ANTI_ALIAS_FLAG);
             mEraser.setMaskFilter(new BlurMaskFilter(8, BlurMaskFilter.Blur.NORMAL));
