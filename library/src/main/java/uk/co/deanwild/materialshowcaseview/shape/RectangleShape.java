@@ -60,6 +60,7 @@ public class RectangleShape implements Shape {
     @Override
     public void draw(Canvas canvas, Paint paint, int x, int y) {
 
+        paint.setAlpha(240);
         float a = rect.left + x - padding;
         float b = rect.top + y - padding;
         float c = rect.right + x + padding;

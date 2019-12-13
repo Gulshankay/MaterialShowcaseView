@@ -12,6 +12,7 @@ import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Handler;
@@ -194,7 +195,7 @@ public class MaterialShowcaseView extends FrameLayout implements View.OnTouchLis
             canvasPaint = new Paint();
             canvasPaint.setColor(Color.BLACK);
             canvasPaint.setAntiAlias(true);
-            canvasPaint.setAlpha(230);
+            canvasPaint.setAlpha(240);
             canvasPaint.setMaskFilter(new BlurMaskFilter(8, BlurMaskFilter.Blur.NORMAL));
         }
 
@@ -205,15 +206,17 @@ public class MaterialShowcaseView extends FrameLayout implements View.OnTouchLis
 //        mCanvas.drawColor(Color.WHITE, PorterDuff.Mode.XOR);
 
         // Prepare eraser Paint if needed
-        if (mEraser == null) {
+        if (true) {
             mEraser = new Paint();
             mEraser.setColor(Color.BLACK);
+            mEraser.setAntiAlias(true);
+            mEraser.setAlpha(20);
 //            mEraser.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
             mEraser.setFlags(Paint.ANTI_ALIAS_FLAG);
             mEraser.setMaskFilter(new BlurMaskFilter(8, BlurMaskFilter.Blur.NORMAL));
         }
 
-        // draw (erase) shape
+
         mShape.draw(mCanvas, mEraser, mXPosition, mYPosition);
 
         outerCirclePaint = new Paint();
