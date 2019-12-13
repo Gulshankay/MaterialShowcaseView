@@ -4,14 +4,17 @@
     android:shape="oval">
 
     <stroke
-        android:color="@android:color/white"
-        android:width="0.5dp"/>
+        android:color="#FFFFFF"
+        android:width="0.5dp"
+        />
+
     <solid
-        android:color="?android:attr/background"
+        android:color="#000000"
         tools:targetApi="lollipop" />
 
     <corners
-        android:radius="10dp"/>
+        android:radius="@dimen/button_height" />
+
 
 
 </shape>

@@ -69,8 +69,8 @@ public class RectangleShape implements Shape {
         if (!rect.isEmpty()) {
             canvas.drawRoundRect(
                     rectFX,
-                    1,
-                    1,
+                    20,
+                    20,
                     paint
             );
         }
@@ -100,12 +100,13 @@ public class RectangleShape implements Shape {
 
     @Override
     public void drawX(Canvas mCanvas, Paint outerCirclePaint, int mXPosition, int mYPosition) {
+        Rect rectX = new Rect(rect.left + mXPosition, rect.top + mYPosition, rect.right + mXPosition,rect.bottom + mYPosition);
+        RectF rectFX = new RectF(rectX);
         if (!rect.isEmpty()) {
-            mCanvas.drawRect(
-                    rect.left + mXPosition,
-                    rect.top + mYPosition,
-                    rect.right + mXPosition,
-                    rect.bottom + mYPosition,
+            mCanvas.drawRoundRect(
+                    rectFX,
+                    30,
+                    30,
                     outerCirclePaint
             );
         }

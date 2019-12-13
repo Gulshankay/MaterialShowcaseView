@@ -11,40 +11,39 @@
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
+        android:layout_marginBottom="15dp"
         android:paddingLeft="5dp"
-        android:textSize="30dp"
-        android:layout_marginBottom="15dp" />
+        android:textColor="@android:color/white"
+        android:textSize="30dp" />
 
     <TextView
         android:id="@+id/tv_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
         android:paddingLeft="5dp"
+        android:textColor="@android:color/white"
         android:textSize="20dp" />
 
     <ImageButton
         android:id="@+id/tv_dismiss"
-        android:layout_width="72dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="36dp"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="@dimen/button_height"
+        android:layout_gravity="right"
+        android:layout_marginTop="56dp"
         android:background="@drawable/button_below_dialog_black"
         android:src="@drawable/ic_navigate_next_black_48dp"
         android:visibility="visible" />
 
     <Button
         android:id="@+id/tv_skip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="right"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="@dimen/button_height"
+        android:layout_gravity="bottom"
+        android:background="@drawable/button_below_dialog_black_skip"
+        android:textColor="#FFFFFF"
         android:textSize="18dp"
-        android:background="@drawable/button_below_dialog_black"
         android:visibility="gone" />
+
+
 
 </LinearLayout>

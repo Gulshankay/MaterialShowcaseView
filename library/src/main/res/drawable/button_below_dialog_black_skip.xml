@@ -4,10 +4,12 @@
     android:shape="oval">
 
     <stroke
-        android:color="@android:color/darker_gray"
-        android:width="0.5dp"/>
+        android:color="?android:attr/background"
+        android:width="0.2dp"
+        tools:targetApi="lollipop" />
     <solid
-        android:color="#000000" />
+        android:color="?android:attr/background"
+        tools:targetApi="lollipop" />
 
     <corners
         android:radius="10dp"
