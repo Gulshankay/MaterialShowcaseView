@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.Xfermode;
 
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
@@ -16,11 +17,12 @@ public class RectangleShape implements Shape {
 
     private boolean fullWidth = true;
 
-    private int width = 0;
-    private int height = 0;
+    private float width = 0;
+    private float height = 0;
     private boolean adjustToTarget = true;
 
     private Rect rect;
+    private RectF rectF;
     private int padding = 30;
 
     public RectangleShape(int width, int height) {
@@ -51,18 +53,24 @@ public class RectangleShape implements Shape {
     }
 
     private void init() {
-        rect = new Rect(-width / 2, -height / 2, width / 2, height / 2);
+        rect = new Rect((int)-width / 2, (int)-height / 2, (int)width / 2, (int)height / 2);
+        rectF = new RectF(rect);
     }
 
     @Override
     public void draw(Canvas canvas, Paint paint, int x, int y) {
 
+        float a = rect.left + x - padding;
+        float b = rect.top + y - padding;
+        float c = rect.right + x + padding;
+        float d = rect.bottom + y + padding;
+        Rect rectX = new Rect(rect.left + x - padding, rect.top + y - padding, rect.right + x + padding,rect.bottom + y + padding);
+        RectF rectFX = new RectF(rectX);
         if (!rect.isEmpty()) {
-            canvas.drawRect(
-                    rect.left + x - padding,
-                    rect.top + y - padding,
-                    rect.right + x + padding,
-                    rect.bottom + y + padding,
+            canvas.drawRoundRect(
+                    rectFX,
+                    1,
+                    1,
                     paint
             );
         }
@@ -82,7 +90,7 @@ public class RectangleShape implements Shape {
 
     @Override
     public int getTotalRadius() {
-        return (height / 2) + padding;
+        return (int)(height / 2) + padding;
     }
 
     @Override
@@ -105,11 +113,11 @@ public class RectangleShape implements Shape {
 
     @Override
     public int getWidth() {
-        return width;
+        return (int)width;
     }
 
     @Override
     public int getHeight() {
-        return height;
+        return (int)height;
     }
 }

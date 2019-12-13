@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -191,12 +192,11 @@ public class MaterialShowcaseView extends FrameLayout implements View.OnTouchLis
 
         if(true) {
             canvasPaint = new Paint();
-            canvasPaint.setColor(Color.BLUE);
+            canvasPaint.setColor(Color.BLACK);
             canvasPaint.setAntiAlias(true);
-            canvasPaint.setAlpha(255);
+            canvasPaint.setAlpha(230);
+            canvasPaint.setMaskFilter(new BlurMaskFilter(8, BlurMaskFilter.Blur.NORMAL));
         }
-
-
 
         float mWidth= this.getResources().getDisplayMetrics().widthPixels;
         float mHeight= this.getResources().getDisplayMetrics().heightPixels;
@@ -204,15 +204,13 @@ public class MaterialShowcaseView extends FrameLayout implements View.OnTouchLis
         mCanvas.drawCircle(mWidth, mHeight, 3*mHeight, canvasPaint);
 //        mCanvas.drawColor(Color.WHITE, PorterDuff.Mode.XOR);
 
-
-
-
         // Prepare eraser Paint if needed
         if (mEraser == null) {
             mEraser = new Paint();
             mEraser.setColor(Color.BLACK);
 //            mEraser.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
             mEraser.setFlags(Paint.ANTI_ALIAS_FLAG);
+            mEraser.setMaskFilter(new BlurMaskFilter(8, BlurMaskFilter.Blur.NORMAL));
         }
 
         // draw (erase) shape
@@ -632,11 +630,14 @@ public class MaterialShowcaseView extends FrameLayout implements View.OnTouchLis
     }
 
     void updateDismissButton(boolean enableDismiss) {
+        Log.d("XA", "updateDismissButton: ");
+
         // hide or show button
         if (mDismissButton != null) {
             if (!enableDismiss) {
                 mDismissButton.setVisibility(GONE);
             } else {
+                Log.d("XA", "updateDismissButton: ");
                 mDismissButton.setVisibility(VISIBLE);
             }
         }
